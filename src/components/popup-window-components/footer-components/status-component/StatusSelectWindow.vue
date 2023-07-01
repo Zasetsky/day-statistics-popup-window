@@ -52,7 +52,7 @@ export default class StatusSelectWindow extends Vue {
   height: 89px;
   position: absolute;
   left: 113%;
-  top: -32px;
+  top: -22px;
   width: 218px;
   border: 1px solid #17505b;
   background-color: #f1faf5;
@@ -103,9 +103,9 @@ export default class StatusSelectWindow extends Vue {
 
     &__icon--selected {
       position: absolute;
-      right: 40px;
-      height: 4.5px;
-      width: 6.75px;
+      right: 20px;
+      height: 24px;
+      width: 24px;
       color: #17505b;
     }
   }

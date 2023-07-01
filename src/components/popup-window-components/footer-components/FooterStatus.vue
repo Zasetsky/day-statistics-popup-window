@@ -11,6 +11,7 @@
       <i
         v-if="user.isAdmin"
         class="el-icon-arrow-right footer-status__arrow"
+        :class="{ 'footer-status__arrow--hover': isHovered || showOptions }"
       ></i>
     </div>
 
@@ -34,6 +35,7 @@ import { User, Status } from "@/types";
 })
 export default class FooterStatus extends Vue {
   showOptions = false;
+  isHovered = false;
   statuses = [
     { value: "success", label: "День засчитан" },
     { value: "warning", label: "Нарушение" },
@@ -70,17 +72,22 @@ export default class FooterStatus extends Vue {
         return "transparent";
     }
   }
+
+  mounted() {
+    this.$el.addEventListener("mouseenter", () => {
+      this.isHovered = true;
+    });
+    this.$el.addEventListener("mouseleave", () => {
+      this.isHovered = false;
+    });
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .footer-status {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   position: relative;
   width: 100%;
-  margin-top: 10px;
   color: #303133;
   font-weight: bold;
 
@@ -95,7 +102,16 @@ export default class FooterStatus extends Vue {
       display: flex;
       align-items: center;
     }
+
+    & .el-icon-arrow-right {
+      transition: color 0.3s ease-in-out;
+    }
   }
+
+  .footer-status__arrow--hover {
+    color: #6fcf97 !important;
+  }
+
   .status-circle {
     width: 14px;
     height: 14px;
