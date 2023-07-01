@@ -3,7 +3,7 @@ import { Status, RootState } from "@/types";
 
 const statusModule: Module<Status, RootState> = {
   state: {
-    dayStatus: "danger",
+    dayStatus: "success",
     comment: "Опоздание. Подписана объяснительная на имя директора.",
   },
 

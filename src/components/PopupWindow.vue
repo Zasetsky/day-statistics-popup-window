@@ -21,9 +21,9 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import Header from "./Header.vue";
-import Content from "./Content.vue";
-import Footer from "./Footer.vue";
+import Header from "./popup-window-components/Header.vue";
+import Content from "./popup-window-components/Content.vue";
+import Footer from "./popup-window-components/Footer.vue";
 
 @Component({
   components: {
@@ -41,6 +41,7 @@ export default class PopupWindow extends Vue {
 .popup-window {
   &__dialog .el-dialog {
     background-color: #f1faf5;
+    border: 1px solid #17505b;
     border-radius: 4px;
   }
 
@@ -64,6 +65,17 @@ export default class PopupWindow extends Vue {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 10px solid #f1faf5;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: -11px;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-top: 11px solid #17505b;
+      z-index: -1;
+    }
   }
 }
 </style>
