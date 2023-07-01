@@ -3,13 +3,18 @@
     <el-dialog
       :visible.sync="visible"
       :width="'250px'"
+      class="popup-window__dialog"
       :show-close="false"
-      class="dialog"
     >
-      <Header :breaksCount="4" totalTime="8 ч. 10 мин" downtime="0 мин" />
-      <Content />
-      <Footer />
-      <div class="arrow"></div>
+      <Header
+        class="popup-window__header"
+        :breaksCount="4"
+        totalTime="8 ч. 10 мин."
+        downtime="0 мин."
+      />
+      <Content class="popup-window__content" />
+      <Footer class="popup-window__footer" :dayStatus="'danger'" />
+      <div class="popup-window__arrow"></div>
     </el-dialog>
   </div>
 </template>
@@ -32,16 +37,33 @@ export default class PopupWindow extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 .popup-window {
-  position: relative;
-}
-.arrow {
-  position: absolute;
-  bottom: -10px;
-  left: calc(50% - 10px);
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #ffffff;
+  &__dialog .el-dialog {
+    background-color: #f1faf5;
+    border-radius: 4px;
+  }
+
+  &__header {
+    height: 99px;
+  }
+
+  &__content {
+    height: 152px;
+  }
+
+  &__footer {
+    min-height: 64px;
+    max-height: 180px;
+  }
+
+  &__arrow {
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 10px);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #f1faf5;
+  }
 }
 </style>
