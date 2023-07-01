@@ -7,33 +7,43 @@
       ></span>
       {{ statusText }}
     </p>
-    <p class="footer__comment" v-if="isAdmin || comment">
-      Комментарий: {{ comment }}
+    <p class="footer__comment" v-if="status && status.comment">
+      {{ status.comment }}
     </p>
-    <div class="footer__extra-info" v-if="dayStatus === 'danger'">
-      <span class="footer__extra-info__item"
-        >Уровень нормы {{ normLevel }}</span
-      >
-      <span class="footer__extra-info__item"
-        >Количество звонков в день {{ callsCount }}</span
-      >
+    <div
+      class="footer__extra-info"
+      v-if="status && status.dayStatus === 'danger'"
+    >
+      <p class="footer__extra-info__item">
+        Уровень нормы
+        <span>{{ user.normLevel.val }}/{{ user.normLevel.max }}</span>
+      </p>
+      <p class="footer__extra-info__item">
+        Количество звонков в день
+        <span>{{ user.callsCount.val }}/{{ user.callsCount.max }} </span>
+      </p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component } from "vue-property-decorator";
+import { User, Status } from "@/types";
 
 @Component
 export default class Footer extends Vue {
-  @Prop() dayStatus!: string;
-  @Prop() comment!: string;
-  @Prop() isAdmin!: boolean;
-  @Prop() normLevel!: string;
-  @Prop() callsCount!: number;
+  get user() {
+    return this.$store.getters.getUser as User;
+  }
+
+  get status() {
+    return this.$store.getters.getStatus as Status;
+  }
 
   get statusColor() {
-    switch (this.dayStatus) {
+    if (!this.status) return "transparent";
+
+    switch (this.status.dayStatus) {
       case "success":
         return "#6FCF97";
       case "danger":
@@ -46,7 +56,9 @@ export default class Footer extends Vue {
   }
 
   get statusText() {
-    switch (this.dayStatus) {
+    if (!this.status) return "";
+
+    switch (this.status.dayStatus) {
       case "success":
         return "День засчитан";
       case "danger":
@@ -59,7 +71,7 @@ export default class Footer extends Vue {
   }
 
   mounted() {
-    console.log(this.statusColor);
+    console.log(this.status);
   }
 }
 </script>
@@ -90,19 +102,29 @@ export default class Footer extends Vue {
   }
 
   &__comment {
-    color: #303133;
-    font-weight: bold;
+    color: #606266;
+    background-color: #e2f5ea;
+    width: 90%;
+    padding: 11px 10px;
+    font-size: 8px;
+    word-break: keep-all;
   }
 
   &__extra-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    width: 100%;
 
     &__item {
+      display: flex;
+      justify-content: space-between;
       margin-top: 20px;
       font-size: 10px;
       color: #606266;
+
+      span {
+        color: #303133;
+      }
     }
 
     &__item:first-child {

@@ -13,7 +13,7 @@
         downtime="0 мин."
       />
       <Content class="popup-window__content" />
-      <Footer class="popup-window__footer" :dayStatus="'danger'" />
+      <Footer class="popup-window__footer" />
       <div class="popup-window__arrow"></div>
     </el-dialog>
   </div>
