@@ -14,7 +14,13 @@
           totalTime="8 ч. 10 мин."
           downtime="0 мин."
         />
-        <Content class="popup-window__content" />
+        <Content
+          v-if="workPointsForDate.length > 0"
+          class="popup-window__content"
+          :date="date"
+          :workPoints="workPointsForDate"
+          :user="user"
+        />
         <Footer class="popup-window__footer" :date="date" />
         <div class="popup-window__arrow"></div>
       </div>
@@ -27,7 +33,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import Header from "./popup-window-components/Header.vue";
 import Content from "./popup-window-components/Content.vue";
 import Footer from "./popup-window-components/Footer.vue";
-import { LocalStates } from "@/types";
+import { User, LocalStates, WorkPoints } from "@/types";
 
 @Component({
   components: {
@@ -44,6 +50,14 @@ export default class PopupWindow extends Vue {
 
   get showOptions() {
     return this.$store.getters["localStates/getshowOptions"] as LocalStates;
+  }
+
+  get user() {
+    return this.$store.getters["user/getUser"] as User;
+  }
+
+  get workPointsForDate() {
+    return this.user.workPoints[this.date] || ([] as WorkPoints[][]);
   }
 
   startCloseTimeout() {
@@ -76,7 +90,11 @@ export default class PopupWindow extends Vue {
   }
 
   &__content {
-    height: 152px;
+    min-height: 152px;
+    max-height: 168px;
+    width: 225px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 
   &__footer {

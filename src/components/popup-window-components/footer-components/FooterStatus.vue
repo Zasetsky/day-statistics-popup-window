@@ -51,7 +51,7 @@ export default class FooterStatus extends Vue {
   ];
 
   get user() {
-    return this.$store.getters.getUser as User;
+    return this.$store.getters["user/getUser"] as User;
   }
 
   get status() {

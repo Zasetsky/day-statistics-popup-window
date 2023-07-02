@@ -51,7 +51,7 @@ export default class FooterComment extends Vue {
   }
 
   get user() {
-    return this.$store.getters.getUser as User;
+    return this.$store.getters["user/getUser"] as User;
   }
 
   startEditing() {

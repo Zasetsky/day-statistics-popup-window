@@ -31,7 +31,7 @@ export default class Footer extends Vue {
   @Prop() date!: string;
 
   get user() {
-    return this.$store.getters.getUser as User;
+    return this.$store.getters["user/getUser"] as User;
   }
 }
 </script>

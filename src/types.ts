@@ -8,6 +8,16 @@ export interface CallsCount {
   max: number;
 }
 
+export interface WorkPoint {
+  time: string;
+  name?: string;
+  comment: string;
+}
+
+export interface WorkPoints {
+  [date: string]: WorkPoint[][];
+}
+
 export interface LocalStates {
   showOptions: boolean;
 }
@@ -16,7 +26,7 @@ export interface User {
   isAdmin: boolean;
   normLevel: NormLevel;
   callsCount: CallsCount;
-  comment: string;
+  workPoints: WorkPoints;
 }
 
 export interface Status {
