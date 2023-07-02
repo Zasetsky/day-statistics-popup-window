@@ -5,25 +5,29 @@
       :width="'250px'"
       class="popup-window__dialog"
       :show-close="false"
+      :modal="false"
     >
-      <Header
-        class="popup-window__header"
-        :breaksCount="4"
-        totalTime="8 ч. 10 мин."
-        downtime="0 мин."
-      />
-      <Content class="popup-window__content" />
-      <Footer class="popup-window__footer" />
-      <div class="popup-window__arrow"></div>
+      <div @mouseleave="startCloseTimeout" @mouseenter="cancelCloseTimeout">
+        <Header
+          class="popup-window__header"
+          :breaksCount="4"
+          totalTime="8 ч. 10 мин."
+          downtime="0 мин."
+        />
+        <Content class="popup-window__content" />
+        <Footer class="popup-window__footer" :date="date" />
+        <div class="popup-window__arrow"></div>
+      </div>
     </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import Header from "./popup-window-components/Header.vue";
 import Content from "./popup-window-components/Content.vue";
 import Footer from "./popup-window-components/Footer.vue";
+import { LocalStates } from "@/types";
 
 @Component({
   components: {
@@ -33,7 +37,29 @@ import Footer from "./popup-window-components/Footer.vue";
   },
 })
 export default class PopupWindow extends Vue {
+  @Prop() date!: string;
+
   visible = true;
+  closeTimeout: number | null = null;
+
+  get showOption() {
+    return this.$store.getters["localStates/getShowOption"] as LocalStates;
+  }
+
+  startCloseTimeout() {
+    this.closeTimeout = window.setTimeout(() => {
+      if (!this.showOption) {
+        this.visible = false;
+      }
+    }, 300);
+  }
+
+  cancelCloseTimeout() {
+    if (this.closeTimeout !== null) {
+      window.clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+  }
 }
 </script>
 
@@ -71,6 +97,7 @@ export default class PopupWindow extends Vue {
       position: absolute;
       top: -10px;
       left: -11px;
+      right: -11px;
       border-left: 11px solid transparent;
       border-right: 11px solid transparent;
       border-top: 11px solid #17505b;

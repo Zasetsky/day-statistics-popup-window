@@ -6,21 +6,40 @@
     v-model="editComment"
     maxlength="60"
     show-word-limit
-    @blur="updateComment"
     class="hidden-input"
     ref="editInput"
+    @blur="onBlur"
+    @keydown.native="onKeydown"
   />
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import { Status } from "@/types";
 
 @Component
 export default class EditComment extends Vue {
-  @Prop({ default: "" }) public editComment!: string;
+  @Prop() public status!: Status;
 
-  updateComment() {
-    this.$emit("update-comment", this.editComment);
+  get editComment() {
+    return this.status.comment;
+  }
+
+  set editComment(newComment) {
+    this.$store.dispatch("status/updateStatusComment", {
+      date: this.status.date,
+      comment: newComment,
+    });
+  }
+
+  onBlur() {
+    this.$emit("editDone");
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      this.$emit("editDone");
+    }
   }
 
   mounted() {
@@ -33,13 +52,9 @@ export default class EditComment extends Vue {
 
 <style lang="scss">
 .hidden-input {
-  flex-grow: 1;
-  background-color: transparent;
-
   .el-input__inner,
   .el-textarea__inner {
-    border: none;
-    border-radius: 4px;
+    border: 1px solid transparent;
     background-color: #f1faf5;
     color: #606266;
     font: 8px Roboto;
@@ -51,6 +66,13 @@ export default class EditComment extends Vue {
     resize: none;
     box-shadow: none;
     overflow: hidden;
+
+    &:focus {
+      border-color: #e2f5ea;
+      border-radius: 4px;
+      outline: none;
+      box-shadow: none;
+    }
   }
 
   .el-input__count,
@@ -58,7 +80,6 @@ export default class EditComment extends Vue {
     position: absolute;
     color: #17505b !important;
     margin-right: 10px;
-    margin-bottom: 5px;
   }
 }
 </style>

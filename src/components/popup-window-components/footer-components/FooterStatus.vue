@@ -1,6 +1,6 @@
 <template>
   <div class="footer-status">
-    <div class="footer-status__info" @click="showOptions = !showOptions">
+    <div class="footer-status__info" @click="toggleShowOptions">
       <div class="footer-status__info-text">
         <span
           :style="{ backgroundColor: statusColor }"
@@ -11,22 +11,24 @@
       <i
         v-if="user.isAdmin"
         class="el-icon-arrow-right footer-status__arrow"
-        :class="{ 'footer-status__arrow--hover': isHovered || showOptions }"
+        :class="{ 'footer-status__arrow--hover': isHovered || showOption }"
       ></i>
     </div>
 
     <status-select-window
+      :status="status"
       :statuses="statuses"
       :getColor="getColor"
-      :show="showOptions"
+      :show="showOption"
+      @mouseleave.native="onMouseLeave"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import StatusSelectWindow from "./status-component/StatusSelectWindow.vue";
-import { User, Status } from "@/types";
+import { User, Status, LocalStates } from "@/types";
 
 @Component({
   components: {
@@ -34,7 +36,8 @@ import { User, Status } from "@/types";
   },
 })
 export default class FooterStatus extends Vue {
-  showOptions = false;
+  @Prop() date!: string;
+
   isHovered = false;
   statuses = [
     { value: "success", label: "День засчитан" },
@@ -47,7 +50,11 @@ export default class FooterStatus extends Vue {
   }
 
   get status() {
-    return this.$store.getters.getStatus as Status;
+    return this.$store.getters["status/getStatusByDate"](this.date) as Status;
+  }
+
+  get showOption() {
+    return this.$store.getters["localStates/getShowOption"] as LocalStates;
   }
 
   get statusColor() {
@@ -58,6 +65,15 @@ export default class FooterStatus extends Vue {
     if (!this.status) return "";
     const status = this.statuses.find((s) => s.value === this.status.dayStatus);
     return status ? status.label : "";
+  }
+
+  toggleShowOptions() {
+    this.$store.dispatch("localStates/toggleShowOption", !this.showOption);
+    console.log(this.showOption);
+  }
+
+  onMouseLeave() {
+    this.toggleShowOptions();
   }
 
   getColor(status: string) {
@@ -77,6 +93,7 @@ export default class FooterStatus extends Vue {
     this.$el.addEventListener("mouseenter", () => {
       this.isHovered = true;
     });
+
     this.$el.addEventListener("mouseleave", () => {
       this.isHovered = false;
     });

@@ -4,23 +4,18 @@
       <EditComment
         v-if="isEditing"
         :status="status"
-        :editComment="editComment"
-        @update-comment="updateComment"
+        @editDone="isEditing = false"
       />
 
       <button
         v-else-if="!isEditing && !status.comment && user.isAdmin"
         class="add-comment-btn"
-        @click="createComment"
+        @click="startEditing"
       >
         +&nbsp;Комментарий
       </button>
 
-      <p
-        v-else-if="!isEditing && status.comment"
-        class="comment-text"
-        @click="startEditing"
-      >
+      <p v-else-if="!isEditing && status.comment" class="comment-text">
         {{ status.comment }}
         <i
           v-if="user.isAdmin && status.comment"
@@ -37,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import { User, Status } from "@/types";
 import EditComment from "./comment-components/EditComment.vue";
 
@@ -47,30 +42,20 @@ import EditComment from "./comment-components/EditComment.vue";
   },
 })
 export default class FooterComment extends Vue {
+  @Prop() date!: string;
+
   isEditing = false;
-  editComment = "";
 
   get status() {
-    return this.$store.getters.getStatus as Status;
+    return this.$store.getters["status/getStatusByDate"](this.date) as Status;
   }
 
   get user() {
     return this.$store.getters.getUser as User;
   }
 
-  updateComment(newComment: string) {
-    this.isEditing = false;
-    this.editComment = newComment;
-  }
-
   startEditing() {
     this.isEditing = true;
-    this.editComment = this.status.comment;
-  }
-
-  createComment() {
-    this.isEditing = true;
-    this.editComment = "";
   }
 }
 </script>
@@ -106,6 +91,7 @@ export default class FooterComment extends Vue {
 .comment-text {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: #e2f5ea;
   padding: 11px 10px;
   width: 190px;

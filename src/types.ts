@@ -8,6 +8,10 @@ export interface CallsCount {
   max: number;
 }
 
+export interface LocalStates {
+  showOption: boolean;
+}
+
 export interface User {
   isAdmin: boolean;
   normLevel: NormLevel;
@@ -16,11 +20,13 @@ export interface User {
 }
 
 export interface Status {
+  date: string;
   dayStatus: string;
   comment: string;
 }
 
 export interface RootState {
   user: User;
-  status: Status;
+  status: Status[];
+  localStates: LocalStates;
 }

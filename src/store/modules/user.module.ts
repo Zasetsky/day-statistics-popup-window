@@ -1,7 +1,7 @@
 import { Module } from "vuex";
 import { User, RootState } from "@/types";
 
-const userModule: Module<User, RootState> = {
+const user: Module<User, RootState> = {
   state: {
     isAdmin: true,
     normLevel: {
@@ -32,4 +32,4 @@ const userModule: Module<User, RootState> = {
   },
 };
 
-export default userModule;
+export default user;

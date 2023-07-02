@@ -28,14 +28,25 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import { Status } from "@/types";
 
 @Component
 export default class StatusSelectWindow extends Vue {
+  @Prop() public status!: Status;
   @Prop() statuses!: { value: string; label: string }[];
   @Prop() getColor!: (status: string) => string;
   @Prop({ default: false }) show!: boolean;
 
-  selectedStatus = "";
+  get selectedStatus() {
+    return this.status.dayStatus;
+  }
+
+  set selectedStatus(selectedStatus) {
+    this.$store.dispatch("status/updateDayStatus", {
+      date: this.status.date,
+      dayStatus: selectedStatus,
+    });
+  }
 
   updateStatus(status: string) {
     this.selectedStatus = status;

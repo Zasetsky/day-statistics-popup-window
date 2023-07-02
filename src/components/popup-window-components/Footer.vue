@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
-    <footer-status />
-    <footer-comment />
+    <footer-status :date="date" />
+    <footer-comment :date="date" />
     <!-- <div class="footer__extra-info">
       <p class="footer__extra-info__item">
         Уровень нормы
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import { User } from "@/types";
 import FooterStatus from "./footer-components/FooterStatus.vue";
 import FooterComment from "./footer-components/FooterComment.vue";
@@ -28,6 +28,8 @@ import FooterComment from "./footer-components/FooterComment.vue";
   },
 })
 export default class Footer extends Vue {
+  @Prop() date!: string;
+
   get user() {
     return this.$store.getters.getUser as User;
   }
