@@ -1,6 +1,10 @@
 <template>
   <div class="footer-status">
-    <div class="footer-status__info" @click.stop="toggleShowOptions">
+    <div
+      class="footer-status__info"
+      @click.stop="toggleShowOptions(!showOptions)"
+      :style="{ cursor: user.isAdmin ? 'pointer' : 'default' }"
+    >
       <div class="footer-status__info-text">
         <span
           :style="{ backgroundColor: statusColor }"
@@ -71,17 +75,18 @@ export default class FooterStatus extends Vue {
   closeOnOutsideClick(event: Event) {
     const el = this.$refs.statusSelectWindow as Vue | undefined;
     if (el && !el.$el.contains(event.target as Node)) {
-      this.toggleShowOptions();
+      this.toggleShowOptions(false);
     }
   }
 
-  toggleShowOptions() {
-    this.$store.dispatch("localStates/toggleShowOptions", !this.showOptions);
-    console.log(this.showOptions);
+  toggleShowOptions(value: boolean) {
+    if (!this.user.isAdmin) return;
+
+    this.$store.dispatch("localStates/toggleShowOptions", value);
   }
 
   onMouseLeave() {
-    this.toggleShowOptions();
+    this.toggleShowOptions(false);
   }
 
   getColor(status: string) {

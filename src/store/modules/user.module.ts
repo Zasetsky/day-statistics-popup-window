@@ -3,7 +3,7 @@ import { User, RootState } from "@/types";
 
 const user: Module<User, RootState> = {
   state: {
-    isAdmin: true,
+    isAdmin: false,
     normLevel: {
       val: 45,
       max: 100,
