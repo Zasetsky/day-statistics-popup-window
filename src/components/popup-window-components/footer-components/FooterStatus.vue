@@ -1,6 +1,6 @@
 <template>
   <div class="footer-status">
-    <div class="footer-status__info" @click="toggleShowOptions">
+    <div class="footer-status__info" @click.stop="toggleShowOptions">
       <div class="footer-status__info-text">
         <span
           :style="{ backgroundColor: statusColor }"
@@ -11,15 +11,16 @@
       <i
         v-if="user.isAdmin"
         class="el-icon-arrow-right footer-status__arrow"
-        :class="{ 'footer-status__arrow--hover': isHovered || showOption }"
+        :class="{ 'footer-status__arrow--hover': isHovered || showOptions }"
       ></i>
     </div>
 
     <status-select-window
+      ref="statusSelectWindow"
       :status="status"
       :statuses="statuses"
       :getColor="getColor"
-      :show="showOption"
+      :show="showOptions"
       @mouseleave.native="onMouseLeave"
     />
   </div>
@@ -53,8 +54,8 @@ export default class FooterStatus extends Vue {
     return this.$store.getters["status/getStatusByDate"](this.date) as Status;
   }
 
-  get showOption() {
-    return this.$store.getters["localStates/getShowOption"] as LocalStates;
+  get showOptions() {
+    return this.$store.getters["localStates/getshowOptions"] as LocalStates;
   }
 
   get statusColor() {
@@ -67,9 +68,16 @@ export default class FooterStatus extends Vue {
     return status ? status.label : "";
   }
 
+  closeOnOutsideClick(event: Event) {
+    const el = this.$refs.statusSelectWindow as Vue | undefined;
+    if (el && !el.$el.contains(event.target as Node)) {
+      this.toggleShowOptions();
+    }
+  }
+
   toggleShowOptions() {
-    this.$store.dispatch("localStates/toggleShowOption", !this.showOption);
-    console.log(this.showOption);
+    this.$store.dispatch("localStates/toggleShowOptions", !this.showOptions);
+    console.log(this.showOptions);
   }
 
   onMouseLeave() {
@@ -97,6 +105,12 @@ export default class FooterStatus extends Vue {
     this.$el.addEventListener("mouseleave", () => {
       this.isHovered = false;
     });
+
+    window.addEventListener("click", this.closeOnOutsideClick);
+  }
+
+  beforeDestroy() {
+    window.removeEventListener("click", this.closeOnOutsideClick);
   }
 }
 </script>

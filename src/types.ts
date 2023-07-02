@@ -9,7 +9,7 @@ export interface CallsCount {
 }
 
 export interface LocalStates {
-  showOption: boolean;
+  showOptions: boolean;
 }
 
 export interface User {

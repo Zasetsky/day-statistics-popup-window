@@ -42,13 +42,13 @@ export default class PopupWindow extends Vue {
   visible = true;
   closeTimeout: number | null = null;
 
-  get showOption() {
-    return this.$store.getters["localStates/getShowOption"] as LocalStates;
+  get showOptions() {
+    return this.$store.getters["localStates/getshowOptions"] as LocalStates;
   }
 
   startCloseTimeout() {
     this.closeTimeout = window.setTimeout(() => {
-      if (!this.showOption) {
+      if (!this.showOptions) {
         this.visible = false;
       }
     }, 300);

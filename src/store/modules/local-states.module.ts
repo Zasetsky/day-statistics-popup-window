@@ -5,23 +5,23 @@ const localStates: Module<LocalStates, RootState> = {
   namespaced: true,
 
   state: {
-    showOption: false,
+    showOptions: false,
   },
 
   mutations: {
-    setShowOption(state, value: boolean) {
-      state.showOption = value;
+    setshowOptions(state, value: boolean) {
+      state.showOptions = value;
     },
   },
 
   actions: {
-    toggleShowOption({ commit }, value: boolean) {
-      commit("setShowOption", value);
+    toggleShowOptions({ commit }, value: boolean) {
+      commit("setshowOptions", value);
     },
   },
 
   getters: {
-    getShowOption: (state) => state.showOption,
+    getshowOptions: (state) => state.showOptions,
   },
 };
 
