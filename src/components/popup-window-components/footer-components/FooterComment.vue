@@ -62,6 +62,7 @@ export default class FooterComment extends Vue {
 
 <style scoped lang="scss">
 .footer__comment {
+  cursor: default;
   color: $color-gray;
   font: 8px;
   line-height: 8px;

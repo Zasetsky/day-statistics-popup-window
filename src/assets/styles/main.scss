@@ -1,5 +1,4 @@
 // Цвета
-
 $color-primary: #17505B;
 $color-info: #2F80ED;
 $color-warning: #F2994A;
@@ -18,9 +17,7 @@ $color-transparent: transparent;
 $color-background: #f1faf5;
 $color-no-comment: #909399;
 
-.button, .link, .card {
-  transition: 0.3s ease-in-out;
-}
+// Основа
 
 body {
   font-family: "Roboto", sans-serif;
@@ -31,6 +28,8 @@ body {
 .popup-window {
   .popover-custom {
     position: absolute;
+    margin-left: -112px;
+    margin-top: 50px;
     border: 1px solid $color-primary !important;
     border-radius: 4px;
     background-color: $color-light-green !important;
@@ -47,7 +46,7 @@ body {
 }
 
 
-// Conent
+// Content (скролл)
 
 .content {
   overflow-y: auto;

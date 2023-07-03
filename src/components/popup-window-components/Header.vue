@@ -28,6 +28,7 @@ export default class Header extends Vue {
 
 <style scoped lang="scss">
 .header {
+  cursor: default;
   border-bottom: 1px solid $color-primary;
   text-align: left;
   margin: 0 -13px 0 -13px;

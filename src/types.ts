@@ -3,6 +3,10 @@ export interface NormLevel {
   max: number;
 }
 
+export interface LocalStates {
+  showOptions: boolean;
+}
+
 export interface CallsCount {
   val: number;
   max: number;
@@ -14,19 +18,22 @@ export interface WorkPoint {
   comment: string;
 }
 
-export interface WorkPoints {
-  [date: string]: WorkPoint[][];
+export interface datesData {
+  breaksCount: number;
+  totalTime: string;
+  downtime: string;
+  workPoints: WorkPoint[][];
 }
 
-export interface LocalStates {
-  showOptions: boolean;
+export interface dates {
+  [date: string]: datesData;
 }
 
 export interface User {
   isAdmin: boolean;
   normLevel: NormLevel;
   callsCount: CallsCount;
-  workPoints: WorkPoints;
+  dates: dates;
 }
 
 export interface Status {

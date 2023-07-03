@@ -126,6 +126,7 @@ export default class FooterStatus extends Vue {
   width: 100%;
   color: $color-dark-gray;
   font-weight: bold;
+  cursor: default;
 
   &__info {
     display: flex;

@@ -52,23 +52,24 @@ export default class EditComment extends Vue {
 
 <style lang="scss">
 .hidden-input {
+  margin-bottom: 8px;
+
   .el-input__inner,
   .el-textarea__inner {
-    border: 1px solid transparent;
-    background-color: #f1faf5;
-    color: #606266;
-    font: 8px Roboto;
-    line-height: 8px;
-    margin-right: 10px;
-    width: 210px;
+    border: 1px solid $color-light-green-alt;
+    background-color: $color-light-green;
+    color: $color-gray;
+    font-size: 8px;
+    margin-top: 10px;
+    width: 235px;
     height: 40px;
-    padding: 12px 10px;
+    padding: 13px 10px;
     resize: none;
     box-shadow: none;
     overflow: hidden;
 
     &:focus {
-      border-color: #e2f5ea;
+      border-color: $color-light-green-alt;
       border-radius: 4px;
       outline: none;
       box-shadow: none;
@@ -78,7 +79,7 @@ export default class EditComment extends Vue {
   .el-input__count,
   .el-textarea__count {
     position: absolute;
-    color: #17505b !important;
+    color: $color-primary !important;
     margin-right: 10px;
   }
 }

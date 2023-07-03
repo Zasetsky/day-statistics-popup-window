@@ -61,11 +61,26 @@ export default class App extends Vue {
       this.closeTimeout = null;
     }
   }
+
+  hidePopup(event: MouseEvent) {
+    if (!this.$refs.popover) return;
+
+    const popover = (this.$refs.popover as Vue).$el as HTMLElement;
+
+    if (
+      popover &&
+      !popover.contains(event.target as Node) &&
+      !this.showOptions
+    ) {
+      this.isPopupVisible = false;
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .circle {
+  cursor: pointer;
   width: 50px;
   height: 50px;
   background-color: #17505b;
