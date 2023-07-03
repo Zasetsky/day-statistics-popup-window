@@ -1,24 +1,21 @@
 # day-statistics-popup-window
 
-## Project setup
+## Установка проекта
+
 ```
 npm install
-```
 
-### Compiles and hot-reloads for development
-```
+npm lint
+
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Настройка
 
-### Lints and fixes files
-```
-npm run lint
-```
+1. В файле user.module.ts вы можете сменить значение isAdmin для просмотра статуса от лица обычного пользователя и администратора.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+2. В файле PopupWindow.vue можно поменять значение isArrowUp и таким образом изменится направление стрелки. К сожалению, не удалось реализовать динамическую смену направления стрелки, поскольку не удалось получить доступ к popover.js и не было найдено открытого API в документации для этого.
+
+3. app.js в основном реализован просто для теста.
+
+4. В файле Content.vue не удалось кастомизировать полосу соединяющую события на таймлайне в библиотеке ui-element, поэтому был реализован собственный компонент таймлайна, максимально похожий на макет.

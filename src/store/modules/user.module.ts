@@ -5,7 +5,7 @@ const user: Module<User, RootState> = {
   namespaced: true,
 
   state: {
-    isAdmin: false, // Поменяйте чтобы посмотреть состояния от лица админа
+    isAdmin: true, // Поменяйте чтобы посмотреть состояния от лица админа
     normLevel: {
       val: 45,
       max: 100,

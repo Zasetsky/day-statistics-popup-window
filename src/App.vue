@@ -7,6 +7,7 @@
       @mouseover="cancelCloseTimeout"
       @mouseleave="startHidePopup"
       class="circle"
+      :style="{ backgroundColor: getColor(item.dayStatus) }"
       v-popover:popover
     >
       <popup-window
@@ -39,6 +40,19 @@ export default class App extends Vue {
 
   get showOptions() {
     return this.$store.getters["localStates/getshowOptions"] as LocalStates;
+  }
+
+  getColor(status: string) {
+    switch (status) {
+      case "success":
+        return "#6FCF97";
+      case "danger":
+        return "#EB5757";
+      case "warning":
+        return "#F2994A";
+      default:
+        return "transparent";
+    }
   }
 
   showPopup(date: string) {
@@ -83,7 +97,6 @@ export default class App extends Vue {
   cursor: pointer;
   width: 50px;
   height: 50px;
-  background-color: #17505b;
   border-radius: 50%;
   margin: auto;
   margin-top: 80px;

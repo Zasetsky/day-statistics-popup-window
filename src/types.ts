@@ -18,22 +18,22 @@ export interface WorkPoint {
   comment: string;
 }
 
-export interface datesData {
+export interface DatesData {
   breaksCount: number;
   totalTime: string;
   downtime: string;
   workPoints: WorkPoint[][];
 }
 
-export interface dates {
-  [date: string]: datesData;
+export interface Dates {
+  [date: string]: DatesData;
 }
 
 export interface User {
   isAdmin: boolean;
   normLevel: NormLevel;
   callsCount: CallsCount;
-  dates: dates;
+  dates: Dates;
 }
 
 export interface Status {
