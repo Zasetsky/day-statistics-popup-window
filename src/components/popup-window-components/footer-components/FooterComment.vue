@@ -60,12 +60,10 @@ export default class FooterComment extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .footer__comment {
-  color: #606266;
-  margin-top: 15px;
-  margin-bottom: 20px;
-  font: 8px Roboto;
+  color: $color-gray;
+  font: 8px;
   line-height: 8px;
   word-break: keep-all;
 }
@@ -75,16 +73,17 @@ export default class FooterComment extends Vue {
   height: 20px;
   border-radius: 4px;
   font-size: 10px;
-  color: #17505b;
-  background-color: #f1faf5;
-  border: 1px solid #17505b;
+  font-weight: bold;
+  color: $color-primary;
+  background-color: $color-light-green;
+  border: 1px solid $color-primary;
   cursor: pointer;
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 10px;
 
   &:hover {
-    color: #f1faf5;
-    background-color: #17505b;
+    color: $color-light-green;
+    background-color: $color-primary;
   }
 }
 
@@ -92,17 +91,19 @@ export default class FooterComment extends Vue {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #e2f5ea;
+  font-size: 8px;
+  background-color: $color-light-green-alt;
   padding: 11px 10px;
-  width: 190px;
+  margin-top: 10px;
+  width: 215px;
   border-radius: 4px;
 
   &__none {
-    text-align: center;
-    background-color: #e2f5ea;
+    color: $color-no-comment;
+    font-size: 8px;
+    background-color: $color-light-green-alt;
     padding: 11px 10px;
-    width: 190px;
-    border-radius: 4px;
+    width: 215px;
   }
 }
 
@@ -113,7 +114,7 @@ export default class FooterComment extends Vue {
   cursor: pointer;
 
   &:hover {
-    color: #6fcf97;
+    color: $color-success;
   }
 }
 </style>

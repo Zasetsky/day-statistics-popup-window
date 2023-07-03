@@ -28,17 +28,20 @@ export default class Header extends Vue {
 
 <style scoped lang="scss">
 .header {
-  margin: -60px -20px 0 -20px;
-  border-bottom: 1px solid #17505b;
-  padding: 20px;
-  font-family: "Roboto", sans-serif;
+  border-bottom: 1px solid $color-primary;
   text-align: left;
-  color: #303133;
+  margin: 0 -13px 0 -13px;
+  color: $color-dark-gray;
+  line-height: 0;
 
   &__item {
+    margin: 25px;
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+  }
+
+  &__item:first-child {
+    margin-top: 15px;
   }
 
   &__item-label {
@@ -46,7 +49,7 @@ export default class Header extends Vue {
   }
 
   &__item-value {
-    color: #606266;
+    color: $color-gray;
   }
 }
 </style>

@@ -41,9 +41,8 @@ export default class Footer extends Vue {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-family: "Roboto", sans-serif;
-  border-top: 1px solid #17505b;
-  margin: 0 -20px -50px -20px;
+  border-top: 1px solid $color-primary;
+  margin: 0 -13px;
   padding: 20px;
 
   // &__extra-info {

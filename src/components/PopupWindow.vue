@@ -60,41 +60,15 @@ export default class PopupWindow extends Vue {
 }
 </script>
 
-<style lang="scss">
-.popover-custom {
-  border: 1px solid #17505b !important;
-  border-radius: 4px;
-  background-color: #f1faf5 !important;
-  width: 250px !important;
-  max-height: 350px !important;
-  min-height: 203px !important;
-}
-
+<style scoped lang="scss">
 .popup-window {
-  &__header {
-    height: 99px;
-  }
-
-  &__content {
-    min-height: 152px;
-    max-height: 168px;
-    width: 259px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-
-  &__footer {
-    min-height: 64px;
-    max-height: 104px;
-  }
-
   &__arrow {
     position: absolute;
     bottom: -10px;
     left: calc(50% - 10px);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #f1faf5;
+    border-left: 10px solid $color-transparent;
+    border-right: 10px solid $color-transparent;
+    border-top: 10px solid $color-background;
 
     &::before {
       content: "";
@@ -102,9 +76,9 @@ export default class PopupWindow extends Vue {
       top: -10px;
       left: -11px;
       right: -11px;
-      border-left: 11px solid transparent;
-      border-right: 11px solid transparent;
-      border-top: 11px solid #17505b;
+      border-left: 11px solid $color-transparent;
+      border-right: 11px solid $color-transparent;
+      border-top: 11px solid $color-primary;
       z-index: -1;
     }
   }

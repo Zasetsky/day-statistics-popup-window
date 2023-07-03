@@ -39,29 +39,7 @@ export default class Content extends Vue {
 }
 </script>
 
-<style lang="scss">
-.content {
-  height: 200px;
-  overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border-radius: 4px;
-  }
-
-  &:hover::-webkit-scrollbar-thumb {
-    background-color: #d1dcde;
-  }
-}
-
+<style scoped lang="scss">
 .timeline {
   position: relative;
   margin-left: 15px;

@@ -65,8 +65,8 @@ export default class StatusSelectWindow extends Vue {
   left: 113%;
   top: -22px;
   width: 218px;
-  border: 1px solid #17505b;
-  background-color: #f1faf5;
+  border: 1px solid $color-primary;
+  background-color: $color-background;
   border-radius: 4px;
   padding: 20px;
   z-index: 10;
@@ -76,14 +76,14 @@ export default class StatusSelectWindow extends Vue {
     align-items: center;
     padding: 5px 10px;
     justify-content: flex-start;
-    color: #303133;
+    color: $color-dark-gray;
 
     &--selected {
-      color: #17505b;
+      color: $color-primary;
       cursor: default;
 
       &:hover {
-        color: #17505b;
+        color: $color-primary;
       }
     }
 
@@ -91,7 +91,7 @@ export default class StatusSelectWindow extends Vue {
       cursor: pointer;
 
       &:hover {
-        color: #6fcf97;
+        color: $color-success;
       }
     }
 
@@ -117,7 +117,7 @@ export default class StatusSelectWindow extends Vue {
       right: 20px;
       height: 24px;
       width: 24px;
-      color: #17505b;
+      color: $color-primary;
     }
   }
 }
