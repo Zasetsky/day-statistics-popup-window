@@ -11,7 +11,7 @@ const status: Module<Status[], RootState> = {
     },
     {
       date: "03-07-2023",
-      dayStatus: "success",
+      dayStatus: "warning",
       comment: "",
     },
     {
@@ -21,7 +21,7 @@ const status: Module<Status[], RootState> = {
     },
     {
       date: "05-07-2023",
-      dayStatus: "success",
+      dayStatus: "warning",
       comment: "",
     },
     {

@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
 import ElementUI from "element-ui";
-import "./theme/index.css";
+import "@/assets/theme/index.css";
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;

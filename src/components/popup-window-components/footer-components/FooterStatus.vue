@@ -124,8 +124,9 @@ export default class FooterStatus extends Vue {
 .footer-status {
   position: relative;
   width: 100%;
-  color: #303133;
+  color: $color-dark-gray;
   font-weight: bold;
+  cursor: default;
 
   &__info {
     display: flex;
@@ -138,14 +139,10 @@ export default class FooterStatus extends Vue {
       display: flex;
       align-items: center;
     }
-
-    & .el-icon-arrow-right {
-      transition: color 0.3s ease-in-out;
-    }
   }
 
   .footer-status__arrow--hover {
-    color: #6fcf97 !important;
+    color: $color-success !important;
   }
 
   .status-circle {
