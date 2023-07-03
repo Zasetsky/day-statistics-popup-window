@@ -1,19 +1,20 @@
 <template>
   <div class="popup-window">
-    <el-dialog
-      :visible.sync="visible"
-      :width="'250px'"
-      class="popup-window__dialog"
-      :show-close="false"
-      :modal="false"
+    <el-popover
+      ref="popover"
+      placement="top"
+      trigger="manual"
+      :popper-class="'popover-custom'"
+      v-model="isVisible"
     >
-      <div @mouseleave="startCloseTimeout" @mouseenter="cancelCloseTimeout">
+      <div class="popover-content">
         <Header
           class="popup-window__header"
           :breaksCount="4"
           totalTime="8 ч. 10 мин."
           downtime="0 мин."
         />
+
         <Content
           v-if="workPointsForDate.length > 0"
           class="popup-window__content"
@@ -22,9 +23,10 @@
           :user="user"
         />
         <Footer class="popup-window__footer" :date="date" />
+
         <div class="popup-window__arrow"></div>
       </div>
-    </el-dialog>
+    </el-popover>
   </div>
 </template>
 
@@ -33,7 +35,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import Header from "./popup-window-components/Header.vue";
 import Content from "./popup-window-components/Content.vue";
 import Footer from "./popup-window-components/Footer.vue";
-import { User, LocalStates, WorkPoints } from "@/types";
+import { User, WorkPoints } from "@/types";
 
 @Component({
   components: {
@@ -44,13 +46,9 @@ import { User, LocalStates, WorkPoints } from "@/types";
 })
 export default class PopupWindow extends Vue {
   @Prop() date!: string;
+  @Prop() isVisible!: boolean;
 
-  visible = true;
   closeTimeout: number | null = null;
-
-  get showOptions() {
-    return this.$store.getters["localStates/getshowOptions"] as LocalStates;
-  }
 
   get user() {
     return this.$store.getters["user/getUser"] as User;
@@ -59,32 +57,20 @@ export default class PopupWindow extends Vue {
   get workPointsForDate() {
     return this.user.workPoints[this.date] || ([] as WorkPoints[][]);
   }
-
-  startCloseTimeout() {
-    this.closeTimeout = window.setTimeout(() => {
-      if (!this.showOptions) {
-        this.visible = false;
-      }
-    }, 300);
-  }
-
-  cancelCloseTimeout() {
-    if (this.closeTimeout !== null) {
-      window.clearTimeout(this.closeTimeout);
-      this.closeTimeout = null;
-    }
-  }
 }
 </script>
 
 <style lang="scss">
-.popup-window {
-  &__dialog .el-dialog {
-    background-color: #f1faf5;
-    border: 1px solid #17505b;
-    border-radius: 4px;
-  }
+.popover-custom {
+  border: 1px solid #17505b !important;
+  border-radius: 4px;
+  background-color: #f1faf5 !important;
+  width: 250px !important;
+  max-height: 350px !important;
+  min-height: 203px !important;
+}
 
+.popup-window {
   &__header {
     height: 99px;
   }
@@ -92,14 +78,14 @@ export default class PopupWindow extends Vue {
   &__content {
     min-height: 152px;
     max-height: 168px;
-    width: 225px;
+    width: 259px;
     margin-top: 5px;
     margin-bottom: 5px;
   }
 
   &__footer {
     min-height: 64px;
-    max-height: 180px;
+    max-height: 104px;
   }
 
   &__arrow {
