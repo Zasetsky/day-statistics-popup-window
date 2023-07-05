@@ -18,8 +18,10 @@
           ></div>
 
           <div class="content__timeline-content">
-            <span class="content__timeline-time">{{ workPoint.time }}</span>
-            <span class="content__timeline-name">{{ workPoint.name }}</span>
+            <div class="content__timeline-time-name-wrapper">
+              <span class="content__timeline-time">{{ workPoint.time }}</span>
+              <span class="content__timeline-name">{{ workPoint.name }}</span>
+            </div>
             <p class="content__timeline-comment">{{ workPoint.comment }}</p>
           </div>
         </div>
@@ -83,14 +85,18 @@ export default class Content extends Vue {
     margin-left: 10px;
   }
 
+  &__timeline-time-name-wrapper {
+    display: flex;
+  }
+
   &__timeline-time {
     font-size: 12px;
+    min-width: 50px;
     font-weight: bold;
     color: $color-dark-gray;
   }
 
   &__timeline-name {
-    margin-left: 20px;
     font-size: 12px;
     font-weight: bold;
     color: $color-gray;
